@@ -11,7 +11,9 @@ import java.util.List;
 public class EmployeeRepositories implements IEmployeeRepositories {
     private final IDB db;
 
-    public EmployeeRepositories(IDB db) { this.db = db; }
+    public EmployeeRepositories(IDB db) {
+        this.db = db;
+    }
 
     @Override
     public boolean hireEmployee(Employee employee) {
@@ -53,7 +55,7 @@ public class EmployeeRepositories implements IEmployeeRepositories {
             st.setInt(1, id);
 
             ResultSet rs = st.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 Employee employee = new Employee(rs.getInt("id"),
                         rs.getString("name"),
                         rs.getString("surname"),
@@ -61,41 +63,6 @@ public class EmployeeRepositories implements IEmployeeRepositories {
                         rs.getInt("salary"));
                 return employee;
             }
-
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        finally {
-            try {
-                con.close();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
-        }
-        return null;
-    }
-
-    @Override
-    public List<Employee> getAllEmployees() {
-        Connection con = null;
-        try {
-            con = db.getConnection();
-            String sql = "SELECT id, name, surname, position, salary FROM employee";
-            Statement st = con.createStatement();
-
-            ResultSet rs = st.executeQuery(sql);
-            List<Employee> employees = new LinkedList<>();
-            while (rs.next()){
-                Employee employee = new Employee(rs.getInt("id"),
-                        rs.getString("name"),
-                        rs.getString("surname"),
-                        rs.getString("position"),
-                        rs.getInt("salary"));
-                employees.add(employee);
-            }
-            return employees;
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -110,6 +77,41 @@ public class EmployeeRepositories implements IEmployeeRepositories {
         }
         return null;
     }
+
+    @Override
+    public List<Employee> getAllEmployee() {
+        Connection con = null;
+        try {
+            con = db.getConnection();
+            String sql = "SELECT id, name, surname, position, salary FROM employee";
+            Statement st = con.createStatement();
+
+            ResultSet rs = st.executeQuery(sql);
+            List<Employee> employee = new LinkedList<>();
+            while (rs.next()) {
+                Employee employees = new Employee(rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("surname"),
+                        rs.getString("position"),
+                        rs.getInt("salary"));
+                employee.add(employees);
+            }
+            return employee;
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+        return null;
+    }
+
     @Override
     public boolean fireEmployee(int id) {
         Connection con = null;

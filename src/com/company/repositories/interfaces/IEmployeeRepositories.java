@@ -10,4 +10,5 @@ public interface IEmployeeRepositories {
     List<Employee> getAllEmployee();
     boolean fireEmployee(int id);
     List<Employee> getEmployeeByPosition(String position);
+
 }

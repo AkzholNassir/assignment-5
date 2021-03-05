@@ -7,9 +7,7 @@ public class Employee {
     private String position;
     private int salary;
 
-    public Employee(int id, String name, String surname, String position, int salary){
-
-    }
+    public Employee(){}
     public Employee(String name, String surname, String position, int salary){
         setName(name);
         setSurname(surname);
@@ -23,6 +21,7 @@ public class Employee {
         setPosition(position);
         setSalary(salary);
     }
+
 
     public int getId() {
         return id;
