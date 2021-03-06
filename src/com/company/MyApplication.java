@@ -16,8 +16,7 @@ public class MyApplication {
     }
     public void start() {
         while (true) {
-            System.out.println();
-            System.out.println("Welcome to My Application");
+            System.out.println("Welcome to My Application!");
             System.out.println("Select option: (1-5)");
             System.out.println("1. Get all Employees");
             System.out.println("2. Get Employees by id");
